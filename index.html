@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Touristique du Maroc</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #34495e;
+        }
+
+        .section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:disabled {
+            background-color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        form button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        form button:hover {
+            background-color: #34495e;
+        }
+
+        ul#eventList {
+            list-style: none;
+        }
+
+        ul#eventList li {
+            background-color: #ecf0f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer h2 {
+            font-size: 2em;
+        }
+
+        #testimonials p {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        // Animation de bienvenue au chargement du site
+        window.onload = function() {
+            const greeting = document.getElementById('greeting');
+            greeting.innerText = "Bienvenue sur le Portail Touristique du Maroc!";
+            greeting.style.transition = "opacity 1s ease-in-out";
+            greeting.style.opacity = 1;
+        }
+
+        // Affichage des événements dynamiquement
+        document.getElementById("loadEvents").addEventListener("click", () => {
+            const newEvents = [
+                "<li data-month='Décembre'>Festival de la Musique du Monde</li>",
+                "<li data-month='Janvier'>Festival du Film d'Aventure</li>",
+                "<li data-month='Février'>Festival des Arts Visuels</li>"
+            ];
+
+            const eventList = document.getElementById("eventList");
+            newEvents.forEach(function(event) {
+                eventList.innerHTML += event;
+            });
+            document.getElementById("loadEvents").disabled = true;
+            document.getElementById("loadEvents").textContent = "Aucun autre événement disponible";
+        });
+
+        // Ajouter un témoignage
+        document.getElementById("testimonialForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const text = this.querySelector("textarea").value;
+            const testimonial = document.createElement("p");
+            testimonial.textContent = text;
+            document.getElementById("testimonials").appendChild(testimonial);
+            this.reset();
+        });
+
+        // Ajouter un article de blog
+        document.getElementById("loadMorePosts").addEventListener("click", () => {
+            const newPost = document.createElement("article");
+            newPost.innerHTML = "<h3>Nouveaux secrets de voyage</h3><p>Explorez des endroits peu connus au Maroc.</p>";
+            document.getElementById("blogPosts").appendChild(newPost);
+        });
+
+        // Notification après envoi de message
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const statusDiv = document.getElementById("messageStatus");
+            statusDiv.innerHTML = "<p>Merci pour votre message! Nous vous répondrons sous peu.</p>";
+            this.reset();
+        });
+    </script>
+</head>
+<body>
+<header class="banner">
+    <div class="container">
+        <h1 id="greeting"></h1>
+        <p>Un voyage inoubliable au cœur de la culture et des paysages marocains</p>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#activites">Activités</a></li>
+            <li><a href="#pratique">Pratique</a></li>
+            <li><a href="#evenements">Événements</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#communaute">Communauté</a></li>
+            <li><a href="#apropos">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="accueil">
+    <h2>Bienvenue sur le Portail Touristique du Maroc</h2>
+    <p>Explorez le Maroc à travers ses différentes destinations et ses activités passionnantes. Un voyage unique vous attend!</p>
+</section>
+
+<section id="destinations" class="section">
+    <h2>Destinations</h2>
+    <div class="destination-list">
+        <article class="destination-item">
+            <h3>Marrakech</h3>
+            <p>Explorez les souks, les palais et les jardins magnifiques de la ville rouge.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Fès</h3>
+            <p>Découvrez l’une des plus anciennes villes impériales et son patrimoine architectural exceptionnel.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Casablanca</h3>
+            <p>Venez découvrir la ville moderne et ses plages ensoleillées.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Agadir</h3>
+            <p>Profitez des plages dorées et des activités nautiques de cette station balnéaire prisée.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Essaouira</h3>
+            <p>Visitez cette ville portuaire, classée au patrimoine mondial de l'UNESCO, et explorez son médina historique.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Tanger</h3>
+            <p>Ville à la jonction entre la Méditerranée et l’Atlantique, Tanger est un lieu d’histoire et de culture riche.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Ouarzazate</h3>
+            <p>Surnommée la porte du désert, Ouarzazate est célèbre pour ses paysages désertiques et ses studios de cinéma.</p>
+        </article>
+        <article class="destination-item">
+            <h3>Chefchaouen</h3>
+            <p>Ville magique aux maisons bleues, idéal pour une escapade tranquille
